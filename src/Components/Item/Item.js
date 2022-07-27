@@ -1,33 +1,42 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import './styles.css';
 
 
-const Item = ({ title, price, pictureUrl, description, stock }) => {
+const Item = ({ id, title, pictureUrl, types, weight, height }) => {
   return (
-    <Card sx={{ maxWidth: 345, height: 450 }}>
-      <CardMedia sx={{ objectFit: 'contain' }}
-        component="img"
-        height="200"
-        image={pictureUrl}
-        alt="Product"
-      />
-      <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
-          ${price}
-        </Typography>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-  
-        <Typography sx={{ height: 50 }} variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-        
-      </CardContent>
-    </Card>
+
+    <div className="item-container">
+
+      <div className="item-header">
+        <img className='item-image' alt={`Imagen de ${title}`}src={pictureUrl} />
+      </div>
+
+      <div className='item-body'>
+        <div className="item-info">
+
+          <div className="item-title">
+          <h3>{title}</h3>
+          <span>#{id}</span>
+          </div>
+
+          <div className="item-description">
+            <span>Peso: {(weight/10)} kg</span>
+            <span>Altura: {(height/10)} mts</span>
+          </div> 
+
+          <div className="item-types">
+            <ul>
+              {types.map((type, index) => <li key={index}>{type.type.name}</li>)}
+            </ul>
+           </div> 
+
+
+        </div>
+      </div>
+
+    </div>
+
+
   );
 };
 

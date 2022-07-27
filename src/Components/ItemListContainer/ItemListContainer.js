@@ -2,48 +2,59 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-import getData from "../../Services/products";
+import { getPokemons } from "../../Services/connection";
 
 import { Container, Grid } from "@mui/material";
 import Item from "../Item/Item";
 import './styles.css'
 
 const ItemListContainer = () => {
-  const [listProducts, setListProducts] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     setLoading(true);
-    getData()
+    /* getData()
       .then((result) => setListProducts(result))
       .catch(() => console.log("Error al traer los productos"))
+      .finally(() => setLoading(false)); */
+
+    getPokemons()
+      .then((result) => setPokemons(result))
       .finally(() => setLoading(false));
+
+   /*  console.log('Lista de Pokemones', pokemons);
+ */
+
+
   }, []);
 
   return (
     <section>
       {loading ? (
-        <Container  fixed>
-        <Box className="container-loading">
-          <CircularProgress />
-        </Box>
+        <Container fixed>
+          <Box className="container-loading">
+            <CircularProgress />
+          </Box>
         </Container>
       ) : (
 
-        <Container fixed sx={{padding:12}}>
+        <Container fixed sx={{ padding: 12 }}>
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-            {listProducts.map(
-              ({ id, title, price, pictureUrl, description, stock }, index) => {
+            {pokemons.map(
+              ({ id, name, sprites, types, weight, height}, index) => {
                 return (
                   <Grid item xs={12} sm={4} md={3} key={index}>
                     <Item
                       key={id}
-                      title={title}
-                      price={price}
-                      pictureUrl={pictureUrl}
-                      description={description}
-                      stock={stock}
+                      id={id}
+                      title={name}
+                      weight={weight}
+                      height={height}
+                      types={types}
+                      pictureUrl={sprites.other.dream_world.front_default}
                     />
                   </Grid>
                 );

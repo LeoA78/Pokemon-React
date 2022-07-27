@@ -20,9 +20,8 @@ import './styles.css';
 
 const drawerWidth = 240;
 const navItems = [
-  { title: "Productos", link: "/" },
-  { title: "Nosotros", link: "/about" },
-  { title: "Carrito", link: "/cart" },
+  { title: "Pokemons", link: "/" },
+  { title: "Sobre Mi", link: "/about" },
 ];
 
 const NavBar = (props) => {
@@ -36,7 +35,7 @@ const NavBar = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center"}}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        TAREA
+        POKEDEX
       </Typography>
       <Divider />
       <List>
@@ -58,7 +57,7 @@ const NavBar = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar style={{ backgroundColor: '#252525' }} component="nav">
+      <AppBar style={{ backgroundColor: '#C71F25' }} component="nav">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -74,7 +73,7 @@ const NavBar = (props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            TAREA
+            POKEDEX
           </Typography>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
