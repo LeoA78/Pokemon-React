@@ -2,6 +2,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+
+  background: #282F4D;
 }
 
 /* card colors */
@@ -43,15 +45,15 @@ body {
 }
 
 .fire{
-  background-color: #f2953b;
+  background-color: #FF7F00;
 }
 
 .water {
-  background-color: #92a0c2;
+  background-color: 	#8080FF;
 }
 
 .grass{
-  background-color: #9dc652;
+  background-color: #108103;
 }
 
 .electric {

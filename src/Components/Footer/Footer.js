@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer>
             <div className="container-footer">
-                <p>Desarrollado con ❤️ para Ayi Academy - Equipo C</p>
+                <p>Desarrollado con ❤️ para Ayi Academy - Leonel Altamirano</p>
             </div>
         </footer>
 

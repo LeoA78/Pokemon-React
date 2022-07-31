@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-
 import { getPokemons } from "../../Services/connection";
-
 import { Container, Grid } from "@mui/material";
 import Item from "../Item/Item";
 import './styles.css'
+
+
 
 const ItemListContainer = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -15,18 +15,10 @@ const ItemListContainer = () => {
   useEffect(() => {
 
     setLoading(true);
-    /* getData()
-      .then((result) => setListProducts(result))
-      .catch(() => console.log("Error al traer los productos"))
-      .finally(() => setLoading(false)); */
 
     getPokemons()
       .then((result) => setPokemons(result))
       .finally(() => setLoading(false));
-
-   /*  console.log('Lista de Pokemones', pokemons);
- */
-
 
   }, []);
 
@@ -35,7 +27,9 @@ const ItemListContainer = () => {
       {loading ? (
         <Container fixed>
           <Box className="container-loading">
-            <CircularProgress />
+            <CircularProgress sx={{
+              color: '#f7cd3b',
+            }} />
           </Box>
         </Container>
       ) : (
@@ -44,7 +38,7 @@ const ItemListContainer = () => {
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
             {pokemons.map(
-              ({ id, name, sprites, types, weight, height}, index) => {
+              ({ id, name, sprites, types, weight, height }, index) => {
                 return (
                   <Grid item xs={12} sm={4} md={3} key={index}>
                     <Item
@@ -54,7 +48,7 @@ const ItemListContainer = () => {
                       weight={weight}
                       height={height}
                       types={types}
-                      pictureUrl={sprites.other.dream_world.front_default}
+                      pictureUrl={sprites.other['official-artwork'].front_default}
                     />
                   </Grid>
                 );
