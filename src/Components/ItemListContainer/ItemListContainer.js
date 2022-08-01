@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { getPokemons } from "../../Services/connection";
 import { Container, Grid } from "@mui/material";
+import { useDispatch, useSelector } from 'react-redux'
+import { getPokemons } from "../../slices/pokemon/thunks";
+
 import Item from "../Item/Item";
 import './styles.css'
 
 
 
 const ItemListContainer = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { pokemons, isLoading, page } = useSelector(state => state.pokemon);
 
   useEffect(() => {
 
-    setLoading(true);
+    dispatch(getPokemons(0));
 
-    getPokemons()
-      .then((result) => setPokemons(result))
-      .finally(() => setLoading(false));
 
-  }, []);
+  }, [dispatch, page]);
+
 
   return (
     <section>
-      {loading ? (
+      {isLoading ? (
         <Container fixed>
           <Box className="container-loading">
             <CircularProgress sx={{
@@ -37,23 +37,23 @@ const ItemListContainer = () => {
         <Container fixed sx={{ padding: 12 }}>
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-            {pokemons.map(
-              ({ id, name, sprites, types, weight, height }, index) => {
-                return (
-                  <Grid item xs={12} sm={4} md={3} key={index}>
-                    <Item
-                      key={id}
-                      id={id}
-                      title={name}
-                      weight={weight}
-                      height={height}
-                      types={types}
-                      pictureUrl={sprites.other['official-artwork'].front_default}
-                    />
-                  </Grid>
-                );
-              }
-            )}
+             {pokemons.map(
+            ({ id, name, sprites, types, weight, height }, index) => {
+              return (
+                <Grid item xs={12} sm={4} md={3} key={index}>
+                  <Item
+                    key={id}
+                    id={id}
+                    title={name}
+                    weight={weight}
+                    height={height}
+                    types={types}
+                    pictureUrl={sprites.other['official-artwork'].front_default}
+                  />
+                </Grid>
+              );
+            }
+          )} 
 
           </Grid>
         </Container>

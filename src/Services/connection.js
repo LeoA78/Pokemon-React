@@ -1,6 +1,6 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 
-const getData = async (url_api) => {
+export const getData = async (url_api) => {
     try {
         const response = await fetch(url_api);
         const data = await response.json();
@@ -9,7 +9,7 @@ const getData = async (url_api) => {
         console.log(error); 
     }
 }
-
+/* 
 export const getPokemons = async () => {
     try {
         const pokemonList = [];
@@ -27,7 +27,7 @@ export const getPokemons = async () => {
     catch (error) {
         console.log(error);
     }
-}
+} */
 
 export const getPokemonById = async (id) => {
     try {

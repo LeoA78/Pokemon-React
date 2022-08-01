@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { getPokemonById } from "../../Services/connection";
 import { Container, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import './styles.css'
+import { getPokemonById } from "../../slices/pokemon/thunks";
+import { useSelector, useDispatch } from 'react-redux'
 
 
 const ItemDetailContainer = () => {
 
-    const [pokemon, setPokemon] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const { pokemonById, isLoading } = useSelector(state => state.pokemon);
+
     const { pokemonId } = useParams();
 
     useEffect(() => {
 
-        setLoading(true);
+        dispatch(getPokemonById(pokemonId));
 
-        getPokemonById(pokemonId)
-            .then((result) => setPokemon(result))
-            .finally(() => setLoading(false));
-
-    }, [pokemonId]);
+    }, [dispatch, pokemonId]);
 
     return (
         <section>
-            {loading ? (
+            {isLoading ? (
                 <Container fixed>
                     <Box className="container-loading">
                         <CircularProgress sx={{
@@ -39,10 +37,10 @@ const ItemDetailContainer = () => {
                 <Container className='container' fixed sx={{ padding: 12 }}>
                     <Grid container >
                         <ItemDetail
-                            id={pokemon.id}
-                            title={pokemon.name}
-                            stats={pokemon.stats}
-                            pictureUrl={pokemon.sprites.other['official-artwork'].front_default} />
+                            id={pokemonById.id}
+                            title={pokemonById.name}
+                            stats={pokemonById.stats}
+                            pictureUrl={pokemonById.sprites.other['official-artwork'].front_default} />
                     </Grid>
                 </Container>
 
