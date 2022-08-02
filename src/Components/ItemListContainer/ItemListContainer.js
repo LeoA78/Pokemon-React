@@ -16,10 +16,10 @@ const ItemListContainer = () => {
 
   useEffect(() => {
 
-    dispatch(getPokemons(0));
+    dispatch(getPokemons(1));
 
 
-  }, [dispatch, page]);
+  }, [dispatch]);
 
 
   return (
@@ -38,7 +38,7 @@ const ItemListContainer = () => {
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
              {pokemons.map(
-            ({ id, name, sprites, types, weight, height }, index) => {
+            ({ id, name, image, types, weight, height }, index) => {
               return (
                 <Grid item xs={12} sm={4} md={3} key={index}>
                   <Item
@@ -48,7 +48,7 @@ const ItemListContainer = () => {
                     weight={weight}
                     height={height}
                     types={types}
-                    pictureUrl={sprites.other['official-artwork'].front_default}
+                    pictureUrl={image}
                   />
                 </Grid>
               );

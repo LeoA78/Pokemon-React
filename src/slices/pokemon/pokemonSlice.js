@@ -4,14 +4,14 @@ const initialState = {
     isLoading: false,
     page: 1,
     pokemons: [],
-    pokemonById: 0,
+    pokemonSelected: {},
 }
 
 export const pokemonSlice = createSlice({
     name: 'pokemon',
     initialState,
     reducers: {
-        startLoadingPokemons: (state, action) => {
+        startLoadingPokemons: (state) => {
             state.isLoading = true;
         },
         setPokemons: (state, action) => {
@@ -19,13 +19,13 @@ export const pokemonSlice = createSlice({
             state.page = action.payload.page;
             state.pokemons = action.payload.pokemons;
         },
-        setPokemonById: (state, action) => {
+        setPokemonSelected: (state, action) => {
             state.isLoading = false;
-            state.pokemonById = action.payload.pokemonById;
+            state.pokemonSelected = action.payload.pokemonSelected;
         }
 
 
     },
 });
 
-export const { startLoadingPokemons, setPokemons, setPokemonById } = pokemonSlice.actions;
+export const { startLoadingPokemons, setPokemons, setPokemonSelected } = pokemonSlice.actions;

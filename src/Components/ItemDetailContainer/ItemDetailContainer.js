@@ -4,27 +4,27 @@ import Box from "@mui/material/Box";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { Container, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
-import './styles.css'
-import { getPokemonById } from "../../slices/pokemon/thunks";
+import { getPokemonSelected } from "../../slices/pokemon/thunks";
 import { useSelector, useDispatch } from 'react-redux'
+import './styles.css'
 
 
 const ItemDetailContainer = () => {
 
     const dispatch = useDispatch();
-    const { pokemonById, isLoading } = useSelector(state => state.pokemon);
+    const { pokemonSelected, isLoading } = useSelector(state => state.pokemon);
 
     const { pokemonId } = useParams();
 
     useEffect(() => {
 
-        dispatch(getPokemonById(pokemonId));
+        dispatch(getPokemonSelected(pokemonId));
 
     }, [dispatch, pokemonId]);
 
     return (
         <section>
-            {isLoading ? (
+             {isLoading ? (
                 <Container fixed>
                     <Box className="container-loading">
                         <CircularProgress sx={{
@@ -35,16 +35,17 @@ const ItemDetailContainer = () => {
             ) : (
 
                 <Container className='container' fixed sx={{ padding: 12 }}>
-                    <Grid container >
+                     <Grid container >
                         <ItemDetail
-                            id={pokemonById.id}
-                            title={pokemonById.name}
-                            stats={pokemonById.stats}
-                            pictureUrl={pokemonById.sprites.other['official-artwork'].front_default} />
-                    </Grid>
+                             id={pokemonSelected.id}
+                            title={pokemonSelected.name}
+                            stats={pokemonSelected.stats} 
+                            pictureUrl={pokemonSelected.image}  
+                            />
+                    </Grid> 
                 </Container>
 
-            )}
+            )} 
         </section>
     );
 };

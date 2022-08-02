@@ -1,19 +1,8 @@
 import { LinearProgress } from '@mui/material';
-/* import React, {useState, useEffect} from 'react';
-import { getEvolutions } from '../../Services/connection'; */
+import React, { useEffect } from 'react';
 import "./styles.css";
 
 const ItemDetail = ({ id, title, stats, pictureUrl }) => {
-
-  /*   const [evolutions, setEvolutions] = useState()
-
-
-    useEffect(() => {
-        getEvolutions(id)
-        .then((result) => setEvolutions(result))
-    }, [id])
-     */
-
 
     return (
         <div className="detail-container">
@@ -26,17 +15,20 @@ const ItemDetail = ({ id, title, stats, pictureUrl }) => {
                 <div className="detail-box-body">
                     <h3>Stats</h3>
 
-                    <div className="detail-stats">
-                        {stats.map((stat) => {
-                            return (
-                                <>
-                                    <span>{stat.stat.name}:</span>
-                                    <LinearProgress variant="determinate" value={stat.base_stat} />
-                                </>
-                            )
-                        })}
-                    </div>
+                     <div className="detail-stats">
 
+                        { stats && stats.map((item, index) =>
+                         {
+                            return (
+                                <section key={index}>
+                                <p>{item.stat.name}</p>
+                                <LinearProgress variant="determinate" value={item.base_stat} />
+                                </section>
+                            )
+                         })}
+
+                    </div> 
+                {console.log('STATS>>> ', stats)}
                 </div>
 
                 <div className="detail-box-footer">
