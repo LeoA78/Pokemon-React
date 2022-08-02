@@ -3,25 +3,46 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser, setMessage } from '../../slices/user/userSlice';
 
 
 export default function SignUp() {
+
+  const dispatch = useDispatch();
+  const { users, message } = useSelector(state => state.user);
+  const navigate = useNavigate();
+
+  const isExistingUser = (email) => {
+    return users.find(user => user.email === email);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    if (!isExistingUser(data.get('email'))) {
+      const user = {
+        name: data.get('firstName'),
+        lastName: data.get('lastName'),
+        email: data.get('email'),
+        password: data.get('password'),
+      }
+      dispatch(createUser(user));
+      navigate('/');
+    } else {
+      dispatch(setMessage({message: 'Ya existe un usuario con ese email'}));
+    }
+
   };
+
+
 
   return (
     <div className='container'>
@@ -84,7 +105,21 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="repeatPassword"
+                  label="Repetir contraseña"
+                  type="password"
+                  id="repeatPassword"
+                  autoComplete="repeat-password"
+                />
+              </Grid>
             </Grid>
+            <Typography component="h6" variant="h6">
+              {message && message}
+            </Typography>
             <Button
               type="submit"
               fullWidth
@@ -95,7 +130,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   ¿Ya tienes una cuenta? Inicia Sesión
                 </Link>
               </Grid>
@@ -103,6 +138,6 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-      </div>
+    </div>
   );
 }

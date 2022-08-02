@@ -16,7 +16,7 @@ const ItemListContainer = () => {
 
   useEffect(() => {
 
-    dispatch(getPokemons(1));
+    dispatch(getPokemons(0));
 
 
   }, [dispatch]);

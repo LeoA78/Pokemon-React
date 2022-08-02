@@ -6,14 +6,15 @@ import ItemListContainer from "./Components/ItemListContainer/ItemListContainer"
 import ItemDetailContainer from "./Components/ItemDetailContainer/ItemDetailContainer";
 import SignIn from "./Components/SignIn/SignIn";
 import SignUp from "./Components/SignUp/SignUp";
-
 import NavBar from "./Components/Navbar/Navbar";
-import { Provider } from 'react-redux';
+import { Provider} from 'react-redux';
 import { store } from "./store/store";
 
 function App() {
+
+
   return (
-    <Provider store={ store }>
+    <Provider store={store}>
       <BrowserRouter>
         <NavBar />
         <Routes>
@@ -24,7 +25,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </Provider>
+    </Provider >
   );
 }
 

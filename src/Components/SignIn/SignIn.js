@@ -5,22 +5,40 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser, setMessage } from '../../slices/user/userSlice';
 
 export default function SignIn() {
+
+
+
+    const dispatch = useDispatch();
+    const { users, message } = useSelector(state => state.user);
+    const navigate = useNavigate();
+
+    const getUser = (email, password) => {
+        return users.find(user => user.email === email && user.password === password);
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+        const user = getUser(data.get('email'), data.get('password'));
+
+        if (user) {
+            dispatch(loginUser({ userLogged: user }));
+            navigate('/pokemons');
+        }else{
+            dispatch(setMessage({message: 'El usuario o la contraseña son incorrectos'}));
+        }
+
     };
 
     return (
@@ -66,6 +84,9 @@ export default function SignIn() {
                             control={<Checkbox value="remember" color="primary" />}
                             label="Recordarme"
                         />
+                        <Typography component="h6" variant="h6">
+                            { message && message }
+                        </Typography>
                         <Button
                             type="submit"
                             fullWidth
@@ -76,7 +97,7 @@ export default function SignIn() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link to="/signup" variant="body2">
                                     {"¿Necesitas una cuenta? Registrate"}
                                 </Link>
                             </Grid>

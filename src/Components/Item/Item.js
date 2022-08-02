@@ -12,7 +12,7 @@ const Item = ({ id, title, pictureUrl, types, weight, height }) => {
         <img className='item-image' alt={`Imagen de ${title}`} src={pictureUrl} />
       </div>
 
-      <Link to={`pokemon/${id}`} className={`item-body ${types[0].type.name}`}>
+      <Link to={`../pokemon/${id}`} className={`item-body ${types[0].type.name}`}>
         <div className="item-info">
 
           <div className="item-title">
