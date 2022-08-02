@@ -6,7 +6,7 @@ import { Container, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { getPokemonSelected } from "../../slices/pokemon/thunks";
 import { useSelector, useDispatch } from 'react-redux'
-import './styles.css'
+
 
 
 const ItemDetailContainer = () => {

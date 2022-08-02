@@ -53,23 +53,16 @@ export const getPokemons = (page = 0) => {
     return async (dispatch) => {
         dispatch(startLoadingPokemons());
 
-
         const { results } = await getData(`${baseUrl}/pokemon/?limit=12&offset=${page * 12}`);
 
-       
-
         const pokemons = await Promise.all(
-
             results.map( pokemon => {
               return getInfoPokemon(pokemon.url);
             })
-
         )
 
-        console.log(pokemons);
          dispatch(setPokemons({ pokemons , page })); 
     }
-
 }
 
 
@@ -81,7 +74,7 @@ export const getPokemonSelected = (id) => {
 
         const response = await getInfoPokemon(`${baseUrl}/pokemon/${id}`);
 
-        console.log('Esta es la respuesta by id', response);
+        console.log('Pokemon selected -->', response);
 
         dispatch(setPokemonSelected({ pokemonSelected: response })); 
     }

@@ -1,5 +1,5 @@
 import { LinearProgress } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import "./styles.css";
 
 const ItemDetail = ({ id, title, stats, pictureUrl }) => {
@@ -28,7 +28,6 @@ const ItemDetail = ({ id, title, stats, pictureUrl }) => {
                          })}
 
                     </div> 
-                {console.log('STATS>>> ', stats)}
                 </div>
 
                 <div className="detail-box-footer">

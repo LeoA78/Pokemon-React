@@ -20,7 +20,7 @@ import './styles.css';
 
 const drawerWidth = 240;
 const navItems = [
-  { title: "Pokemons", link: "/" },
+  { title: "Pokemons", link: "/pokemons" },
   { title: "Sobre Mi", link: "/about" },
 ];
 
