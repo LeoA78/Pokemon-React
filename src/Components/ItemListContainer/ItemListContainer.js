@@ -12,7 +12,7 @@ import './styles.css'
 
 const ItemListContainer = () => {
   const dispatch = useDispatch();
-  const { pokemons, isLoading, page } = useSelector(state => state.pokemon);
+  const { pokemons, isLoading, /* page */ } = useSelector(state => state.pokemon);
 
   useEffect(() => {
 

@@ -97,7 +97,7 @@ export default function SignIn() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link to="/signup" variant="body2">
+                                <Link to="/register" variant="body2">
                                     {"¿Necesitas una cuenta? Registrate"}
                                 </Link>
                             </Grid>
