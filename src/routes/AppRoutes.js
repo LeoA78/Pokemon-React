@@ -6,6 +6,7 @@ import Register from "../Components/Register/Register";
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import Logout from '../Components/Logout/Logout';
 
 const AppRoutes = () => {
     return (
@@ -34,6 +35,13 @@ const AppRoutes = () => {
                     </PrivateRoute>
                 } />
 
+            <Route
+                path="/logout"
+                element={
+                    <PrivateRoute>
+                        <Logout />
+                    </PrivateRoute>
+                } />
 
             <Route
                 path="/pokemon/:pokemonId"

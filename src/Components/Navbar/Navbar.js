@@ -14,26 +14,39 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
+import { useSelector } from "react-redux";
 import './styles.css';
 
 
 const drawerWidth = 240;
-const navItems = [
-  { title: "Pokemons", link: "/pokemons" },
-  { title: "Sobre Mi", link: "/about" },
-];
+
+
 
 const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { userLogged } = useSelector((state) => state.user);
+
+  const navItems =
+    Object.entries(userLogged).length > 0
+      ? [
+        { title: "Pokemons", link: "/pokemons" },
+        { title: "Sobre Mi", link: "/about" },
+        { title: "Cerrar Sesión", link: "/logout" },
+      ]
+      : [
+        { title: "Pokemons", link: "/pokemons" },
+        { title: "Sobre Mi", link: "/about" },
+      ];
+
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center"}}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         POKEDEX
       </Typography>
