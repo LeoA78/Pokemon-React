@@ -10,15 +10,20 @@ const UserDetailContainer = () => {
     const { userLogged, users } = useSelector(state => state.user);
     const id = users.findIndex(user => user.email === userLogged.email);
 
-  
-    
+
+
 
     return (
-        <Container className='container' fixed sx={{ padding: 12 }}>
-                <Grid container >
-                    <UserDetail props={users[id]} />
-                </Grid>
-            </Container>
+        <Container 
+        sx={{ 
+            padding: 12,
+            minHeight: "100vh",
+
+         }}>
+            <Grid>
+                <UserDetail props={users[id]} />
+            </Grid>
+        </Container>
     );
 };
 

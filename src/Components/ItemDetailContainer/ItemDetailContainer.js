@@ -40,7 +40,11 @@ const ItemDetailContainer = () => {
                              id={pokemonSelected.id}
                             title={pokemonSelected.name}
                             stats={pokemonSelected.stats} 
-                            pictureUrl={pokemonSelected.image}  
+                            pictureUrl={pokemonSelected.image}
+                            height={pokemonSelected.height}
+                            weight={pokemonSelected.weight}
+                            types={pokemonSelected.types}
+                            evolutions={pokemonSelected.evolutions}
                             />
                     </Grid> 
                 </Container>

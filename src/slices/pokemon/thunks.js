@@ -17,35 +17,35 @@ const getInfoPokemon = async (url) => {
         stats: pokemon.stats,
     };
 
-    const evolutionList = await getEvolutionList(pokemon.species.url);
-    infoPokemon.evolutionList = evolutionList;
+    const evolutions = await getEvolutions(pokemon.species.url);
+    infoPokemon.evolutions = evolutions;
 
     return infoPokemon;
 }
 
-const getEvolutionList = async (url) => {
+const getEvolutions = async (url) => {
 
     const { evolution_chain } = await getData(url); // Obtengo id de la evolucion
     const { chain } = await getData(evolution_chain.url); // Obtengo la cadena de evolución
     
-    const evolutionList = [];
+    const evolutions = [];
 
     let currentEvolution = chain;
 
     while (currentEvolution.evolves_to.length > 0) {
-        evolutionList.push(currentEvolution.species.name);
+        evolutions.push(currentEvolution.species.name);
         currentEvolution = currentEvolution.evolves_to[0];
     }
-    evolutionList.push(currentEvolution.species.name); //Agrego el último pókemon
+    evolutions.push(currentEvolution.species.name); //Agrego el último pókemon
 
-    const evolutionListWithImage = await Promise.all(
-        evolutionList.map(async (pokemonName) => {
+    const evolutionsWithImage = await Promise.all(
+        evolutions.map(async (pokemonName) => {
             const { sprites } = await getData(`${baseUrl}/pokemon/${pokemonName}`);
             return { name: pokemonName, image: sprites.other['official-artwork'].front_default };
         }
     ));
 
-    return evolutionListWithImage;
+    return evolutionsWithImage;
 }
 
 export const getPokemons = (page = 1) => {
