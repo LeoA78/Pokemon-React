@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -24,7 +24,7 @@ const drawerWidth = 240;
 
 const NavBar = (props) => {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { userLogged } = useSelector((state) => state.user);
 
   const navItems =

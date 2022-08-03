@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Pagination} from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux'
 import { getPokemons } from "../../slices/pokemon/thunks";
 
@@ -12,14 +12,20 @@ import './styles.css'
 
 const ItemListContainer = () => {
   const dispatch = useDispatch();
-  const { pokemons, isLoading, /* page */ } = useSelector(state => state.pokemon);
+  const { pokemons, isLoading, page } = useSelector(state => state.pokemon);
+
+  const handleChangePage = (event, value) => {
+    event.preventDefault();
+    dispatch(getPokemons(value));
+  }
+
 
   useEffect(() => {
 
-    dispatch(getPokemons(0));
+    dispatch(getPokemons(page));
 
 
-  }, [dispatch]);
+  }, [dispatch,page]);
 
 
   return (
@@ -34,29 +40,46 @@ const ItemListContainer = () => {
         </Container>
       ) : (
 
-        <Container fixed sx={{ padding: 12 }}>
+        <Container fixed 
+        sx={{ 
+          padding: 12,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+         }}>
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
-             {pokemons.map(
-            ({ id, name, image, types, weight, height }, index) => {
-              return (
-                <Grid item xs={12} sm={4} md={3} key={index}>
-                  <Item
-                    key={id}
-                    id={id}
-                    title={name}
-                    weight={weight}
-                    height={height}
-                    types={types}
-                    pictureUrl={image}
-                  />
-                </Grid>
-              );
-            }
-          )} 
-
+            {pokemons.map(
+              ({ id, name, image, types, weight, height }, index) => {
+                return (
+                  <Grid item xs={12} sm={4} md={3} key={index}>
+                    <Item
+                      key={id}
+                      id={id}
+                      title={name}
+                      weight={weight}
+                      height={height}
+                      types={types}
+                      pictureUrl={image}
+                    />
+                  </Grid>
+                );
+              }
+            )}
+            
           </Grid>
+          <Pagination
+            sx={{
+              marginTop: '2rem',
+            }}
+            shape="rounded"
+            count={50}
+            defaultPage={page}
+            onChange={handleChangePage}
+            color="secondary" />
+
         </Container>
+
 
       )}
     </section>

@@ -48,12 +48,12 @@ const getEvolutionList = async (url) => {
     return evolutionListWithImage;
 }
 
-export const getPokemons = (page = 0) => {
+export const getPokemons = (page = 1) => {
 
     return async (dispatch) => {
         dispatch(startLoadingPokemons());
 
-        const { results } = await getData(`${baseUrl}/pokemon/?limit=12&offset=${page * 12}`);
+        const { results } = await getData(`${baseUrl}/pokemon/?limit=12&offset=${(page - 1) * 12}`);
 
         const pokemons = await Promise.all(
             results.map( pokemon => {
