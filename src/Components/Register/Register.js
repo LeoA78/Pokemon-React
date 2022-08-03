@@ -23,11 +23,59 @@ export default function SignUp() {
     return users.find(user => user.email === email);
   }
 
+  const verifyData = (data) => {
+    const email = data.get('email').trim();
+    const password = data.get('password').trim();
+    const confirmPassword = data.get('confirmPassword').trim();
+    const name = data.get('firstName').trim();
+    const lastName = data.get('lastName').trim();
+
+    if (!name) {
+      dispatch(setMessage({ message: 'Completa tu nombre' }));
+      return false;
+    } 
+
+    if (!lastName) {
+      dispatch(setMessage({ message: 'Completa tu apellido' }));
+      return false;
+    } 
+    if (!email) {
+      dispatch(setMessage({ message: 'Completa la dirección de correo electrónico' }));
+      return false;
+    } 
+
+    if (!password) {
+      dispatch(setMessage({ message: 'Completa la contraseña' }));
+      return false;
+    } 
+
+    if (!confirmPassword) {
+      dispatch(setMessage({ message: 'Completa la verificación de contraseña' }));
+      return false;
+    } 
+
+     if (password !== confirmPassword) {
+      console.log('No coinciden!');
+      dispatch(setMessage({ message: 'Las contraseñas no coinciden'}));
+      return false;
+    } 
+    
+    if (isExistingUser(email)) {
+      console.log('Ya existe el usuario!');
+      dispatch(setMessage({ message: 'El usuario ya existe'}));
+      return false;
+    } 
+
+      return true;
+    
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    if (!isExistingUser(data.get('email'))) {
+    if (verifyData(data)) {
       const user = {
         name: data.get('firstName'),
         lastName: data.get('lastName'),
@@ -36,9 +84,8 @@ export default function SignUp() {
       }
       dispatch(createUser(user));
       navigate('/');
-    } else {
-      dispatch(setMessage({message: 'Ya existe un usuario con ese email'}));
-    }
+      dispatch(setMessage({ message: ''}));
+    } 
 
   };
 
@@ -109,10 +156,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="repeatPassword"
+                  name="confirmPassword"
                   label="Repetir contraseña"
                   type="password"
-                  id="repeatPassword"
+                  id="confirmPassword"
                   autoComplete="repeat-password"
                 />
               </Grid>

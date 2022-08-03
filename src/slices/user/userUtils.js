@@ -15,3 +15,4 @@ export const getIndexUser = (users, userLogged) => {
 export const isUserLogged = (userLogged) => {
     return Object.entries(userLogged).length > 0;
 }
+

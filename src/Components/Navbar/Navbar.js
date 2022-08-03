@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
+import { isUserLogged } from "../../slices/user/userUtils";
 import './styles.css';
 
 
@@ -27,17 +28,16 @@ const NavBar = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { userLogged } = useSelector((state) => state.user);
 
-  const navItems =
-    Object.entries(userLogged).length > 0
-      ? [
-        { title: "Pokemons", link: "/pokemons" },
-        { title: "Usuario", link: "/user" },
-        { title: "Cerrar Sesión", link: "/logout" },
-      ]
-      : [
-        { title: "Pokemons", link: "/pokemons" },
-        { title: "Usuario", link: "/user" },
-      ];
+
+  const navItems = isUserLogged(userLogged)
+    ? [
+      { title: "Pokemons", link: "/pokemons" },
+      { title: "Usuario", link: "/user" },
+      { title: "Cerrar Sesión", link: "/logout" },
+    ]
+    : [
+      { title: "Registrarse", link: "/register" },
+    ];
 
 
 
