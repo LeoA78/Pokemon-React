@@ -9,20 +9,20 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import Logout from '../Components/Logout/Logout';
 import { useSelector } from "react-redux";
+import { isUserLogged } from "../slices/user/userUtils";
 
 const AppRoutes = () => {
 
     const { userLogged } = useSelector((state) => state.user);
 
-    const isUserLogged = () => Object.entries(userLogged).length > 0;
-
+    const isLogged = isUserLogged(userLogged);
 
     return (
         <Routes>
             <Route
                 path="/"
                 element={
-                    <PublicRoute auth={isUserLogged()}>
+                    <PublicRoute auth={isLogged}>
                         <Login />
                     </PublicRoute>
                 } />
@@ -30,7 +30,7 @@ const AppRoutes = () => {
             <Route
                 path="/register"
                 element={
-                    <PublicRoute auth={isUserLogged()}>
+                    <PublicRoute auth={isLogged}>
                         <Register />
                     </PublicRoute>
                 } />
@@ -38,7 +38,7 @@ const AppRoutes = () => {
             <Route 
                 path="/pokemons"
                 element={
-                    <PrivateRoute auth={isUserLogged()} >
+                    <PrivateRoute auth={isLogged} >
                         <ItemListContainer />
                     </PrivateRoute>
                 } />
@@ -46,7 +46,7 @@ const AppRoutes = () => {
             <Route
                 path="/user"
                 element={
-                    <PrivateRoute auth={isUserLogged()}>
+                    <PrivateRoute auth={isLogged}>
                         <UserDetailContainer />
                     </PrivateRoute>
                 } />
@@ -54,7 +54,7 @@ const AppRoutes = () => {
             <Route
                 path="/logout"
                 element={
-                    <PrivateRoute auth={isUserLogged()}>
+                    <PrivateRoute auth={isLogged}>
                         <Logout />
                     </PrivateRoute>
                 } />
@@ -62,7 +62,7 @@ const AppRoutes = () => {
             <Route
                 path="/pokemon/:pokemonId"
                 element={
-                    <PrivateRoute auth={isUserLogged()}>
+                    <PrivateRoute auth={isLogged}>
                         <ItemDetailContainer />
                     </PrivateRoute>
                 } />

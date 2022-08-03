@@ -34,14 +34,23 @@ export const userSlice = createSlice({
         setMessage: (state, action) => {
             state.message = action.payload.message;
         },
-        addFavoritePokemon: (state, action) => {
-            const userIndex = state.users.findIndex(user => user.email === state.userLogged.email);
-            if(userIndex !== -1){  
-            state.users[userIndex].favoritePokemons.push(action.payload.pokemon);
+        toggleFavoritePokemon: (state, action) => {
+            const index = action.payload.userIndex;
+
+            if (index !== -1) {
+                const pokemon = action.payload.pokemon;
+                const isFavorited = action.payload.isFavorited;
+                if (isFavorited) {
+                    const newFavouriteList = state.users[index].favoritePokemons.filter(favourite => favourite.id !== pokemon.id);
+                    state.users[index].favoritePokemons = newFavouriteList;
+                }
+                else {
+                    state.users[index].favoritePokemons.push(pokemon);
+                }
             }
         },
 
     },
 });
 
-export const { createUser, loginUser, logoutUser, addFavoritePokemon, setMessage } = userSlice.actions;
+export const { createUser, loginUser, logoutUser, toggleFavoritePokemon, setMessage } = userSlice.actions;

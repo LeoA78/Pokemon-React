@@ -1,12 +1,9 @@
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addFavoritePokemon } from '../../slices/user/userSlice';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import './styles.css';
 
 
-const Item = ({props}) => {
-
-  const dispatch = useDispatch();
+const Item = ({ props }) => {
 
 
   return (
@@ -19,10 +16,9 @@ const Item = ({props}) => {
 
       <Link to={`../pokemon/${props.id}`} className={`item-body ${props.types[0].type.name}`}>
         <div className="item-info">
-
           <div className="item-title">
-            <h3>{props.name}</h3>
-            <span>#{props.id}</span>
+            <h3>{`#${props.id}`}</h3>
+            <span>{`${props.name}`}</span>
           </div>
 
           <div className="item-description">
@@ -41,13 +37,16 @@ const Item = ({props}) => {
               })}
             </ul>
           </div>
-            
-          
 
         </div>
-
+        <div className="item-favorite">
+              <FavoritesButton props={props} />
+        </div>
       </Link>
-      <button onClick={() => dispatch(addFavoritePokemon({pokemon: props}))}>Agregar a Favoritos</button>
+
+
+
+
     </div>
 
 
