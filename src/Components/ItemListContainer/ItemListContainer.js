@@ -50,17 +50,18 @@ const ItemListContainer = () => {
           <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
             {pokemons.map(
-              ({ id, name, image, types, weight, height }, index) => {
+              (pokemon, index) => {
                 return (
                   <Grid item xs={12} sm={4} md={3} key={index}>
                     <Item
-                      key={id}
-                      id={id}
-                      title={name}
-                      weight={weight}
-                      height={height}
-                      types={types}
-                      pictureUrl={image}
+                      key={pokemon.id}
+                      props={pokemon}
+                     /*  id={pokemon.id}
+                      title={pokemon.name}
+                      weight={pokemon.weight}
+                      height={pokemon.height}
+                      types={pokemon.types}
+                      pictureUrl={pokemon.image} */
                     />
                   </Grid>
                 );
@@ -73,7 +74,7 @@ const ItemListContainer = () => {
               marginTop: '2rem',
             }}
             shape="rounded"
-            count={50}
+            count={40}
             defaultPage={page}
             onChange={handleChangePage}
             color="secondary" />

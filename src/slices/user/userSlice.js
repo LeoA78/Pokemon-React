@@ -2,14 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     users: [{
-        id: 0,
         name: 'Leonel',
         lastName: 'Altamirano',
         email: 'pedroleonel78a@gmail.com',
         password: '123456',
+        favoritePokemons: [],
     }],
     userLogged: {},
-    globalId: 0,
     message: '',
 }
 
@@ -19,11 +18,11 @@ export const userSlice = createSlice({
     reducers: {
         createUser: (state, action) => {
             state.users.push({
-                id: state.globalId + 1,
                 name: action.payload.name,
                 lastName: action.payload.lastName,
                 email: action.payload.email,
                 password: action.payload.password,
+                favoritePokemons: [],
             });
         },
         loginUser: (state, action) => {
@@ -32,12 +31,15 @@ export const userSlice = createSlice({
         logoutUser: (state) => {
             state.userLogged = {};
         },
-        addFavoritePokemon: (state, action) => {
-            state.userLogged.favorites.push(action.payload.pokemon);
-        },
         setMessage: (state, action) => {
             state.message = action.payload.message;
-        }
+        },
+        addFavoritePokemon: (state, action) => {
+            const userIndex = state.users.findIndex(user => user.email === state.userLogged.email);
+            if(userIndex !== -1){  
+            state.users[userIndex].favoritePokemons.push(action.payload.pokemon);
+            }
+        },
 
     },
 });

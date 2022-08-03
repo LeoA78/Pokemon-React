@@ -33,7 +33,8 @@ export default function SignIn() {
         const user = getUser(data.get('email'), data.get('password'));
 
         if (user) {
-            dispatch(loginUser({ userLogged: user }));
+            console.log('Este es el usuariuo', user);
+            dispatch(loginUser({ userLogged: {id: user.id, name: user.name, lastName: user.lastName, email: user.email} }));
             navigate('/pokemons');
         }else{
             dispatch(setMessage({message: 'El usuario o la contraseña son incorrectos'}));

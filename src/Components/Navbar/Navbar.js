@@ -31,12 +31,12 @@ const NavBar = (props) => {
     Object.entries(userLogged).length > 0
       ? [
         { title: "Pokemons", link: "/pokemons" },
-        { title: "Sobre Mi", link: "/about" },
+        { title: "Usuario", link: "/user" },
         { title: "Cerrar Sesión", link: "/logout" },
       ]
       : [
         { title: "Pokemons", link: "/pokemons" },
-        { title: "Sobre Mi", link: "/about" },
+        { title: "Usuario", link: "/user" },
       ];
 
 

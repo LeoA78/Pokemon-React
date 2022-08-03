@@ -22,7 +22,7 @@ export const pokemonSlice = createSlice({
         setPokemonSelected: (state, action) => {
             state.isLoading = false;
             state.pokemonSelected = action.payload.pokemonSelected;
-        }
+        },
 
 
     },
