@@ -4,8 +4,6 @@ import "./styles.css";
 
 const ItemDetail = ({ id, title, weight,types, height, stats, evolutions, pictureUrl }) => {
 
-    console.log('Lista de evolciones', evolutions);
-
     return (
         <div className="detail-container">
             <div className="detail-box">
@@ -30,7 +28,7 @@ const ItemDetail = ({ id, title, weight,types, height, stats, evolutions, pictur
                         <h2>Tipo</h2>
                         <div className="item-types">
                             <ul>
-                                {types.map((type, index) => {
+                                {types && types.map((type, index) => {
                                     return (
                                         <li key={index}>
                                             <img className={`item-type-image ${type.type.name}`} src={require(`../../assets/icons/${type.type.name}.svg`)} alt="" />
@@ -57,7 +55,7 @@ const ItemDetail = ({ id, title, weight,types, height, stats, evolutions, pictur
                 </section>
 
                 <section className="detail-box-footer">
-                    <h3>Cadena de Evoluciones</h3>
+                    <h2>Cadena de Evoluciones</h2>
                     <div className="detail-evolutions">
                         {evolutions && evolutions.map((item, index) => {
                             return (

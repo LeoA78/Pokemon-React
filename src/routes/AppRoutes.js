@@ -44,7 +44,7 @@ const AppRoutes = () => {
                 } />
 
             <Route
-                path="/user"
+                path="/favorites"
                 element={
                     <PrivateRoute auth={isLogged}>
                         <UserDetailContainer />

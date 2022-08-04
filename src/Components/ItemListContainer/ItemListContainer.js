@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { Container, Grid, Pagination} from "@mui/material";
+import { Container, Grid, Pagination, Box, CircularProgress} from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux'
 import { getPokemons } from "../../slices/pokemon/thunks";
 
@@ -56,12 +54,6 @@ const ItemListContainer = () => {
                     <Item
                       key={pokemon.id}
                       props={pokemon}
-                     /*  id={pokemon.id}
-                      title={pokemon.name}
-                      weight={pokemon.weight}
-                      height={pokemon.height}
-                      types={pokemon.types}
-                      pictureUrl={pokemon.image} */
                     />
                   </Grid>
                 );

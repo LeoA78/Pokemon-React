@@ -2,6 +2,7 @@ import React from 'react'
 import { toggleFavoritePokemon } from '../../slices/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { isPokemonFavorited , getIndexUser } from '../../slices/user/userUtils';
+import './styles.css';
 
 
 const FavoritesButton = ({props}) => {
@@ -23,8 +24,8 @@ const FavoritesButton = ({props}) => {
 
     return (
         isFavorited
-        ? <button onClick={(e) => handleClick(e)}>Quitar de favoritos</button>
-        : <button onClick={(e) => handleClick(e)}>Agregar a favoritos</button>
+        ? <img className="btn-fav" width='35' src={require(`../../assets/icons/fav.png`)} alt="" onClick={(e) => handleClick(e)}/>
+        : <img className="btn-fav" width='35' src={require(`../../assets/icons/disfav.png`)} alt="" onClick={(e) => handleClick(e)}/>
     )
 }
 

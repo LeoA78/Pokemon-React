@@ -1,0 +1,7 @@
+.btn-fav:hover{
+    width: 40px;
+    transform: rotate(360deg);
+    transition: transform 1s ease-in-out;
+ }
+
+ 

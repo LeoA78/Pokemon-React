@@ -32,7 +32,7 @@ const NavBar = (props) => {
   const navItems = isUserLogged(userLogged)
     ? [
       { title: "Pokemons", link: "/pokemons" },
-      { title: "Usuario", link: "/user" },
+      { title: "Favoritos", link: "/favorites" },
       { title: "Cerrar Sesión", link: "/logout" },
     ]
     : [

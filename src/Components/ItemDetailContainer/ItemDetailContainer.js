@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
 
     return (
         <section>
-             {isLoading ? (
+            {isLoading ? (
                 <Container fixed>
                     <Box className="container-loading">
                         <CircularProgress sx={{
@@ -34,22 +34,27 @@ const ItemDetailContainer = () => {
                 </Container>
             ) : (
 
-                <Container className='container' fixed sx={{ padding: 12 }}>
-                     <Grid container >
+                <Container
+                    fixed
+                    sx={{
+                        padding: 12,
+                        minHeight: '100vh',
+                    }}>
+                    <Grid container >
                         <ItemDetail
-                             id={pokemonSelected.id}
+                            id={pokemonSelected.id}
                             title={pokemonSelected.name}
-                            stats={pokemonSelected.stats} 
+                            stats={pokemonSelected.stats}
                             pictureUrl={pokemonSelected.image}
                             height={pokemonSelected.height}
                             weight={pokemonSelected.weight}
                             types={pokemonSelected.types}
                             evolutions={pokemonSelected.evolutions}
-                            />
-                    </Grid> 
+                        />
+                    </Grid>
                 </Container>
 
-            )} 
+            )}
         </section>
     );
 };
