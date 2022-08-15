@@ -23,8 +23,8 @@ const ItemDetail = ({ id, title, weight,types, height, stats, evolutions, pictur
                 <section className="detail-box-body">
                     <div className="detail-info">
                         <h3>Info</h3>
-                        <p>{`Peso: ${weight / 10} Kg`}</p>
-                        <p>{`Altura: ${height / 10} Mts`}</p>
+                        <p>{`Peso: ${weight / 10} Kg.`}</p>
+                        <p>{`Altura: ${height / 10} Mts.`}</p>
                         <h2>Tipo</h2>
                         <div className="item-types">
                             <ul>
